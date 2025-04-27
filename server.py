@@ -1,15 +1,20 @@
+import sys
 from flask import Flask, request, render_template
 from weather import get_current_weather
 from waitress import serve
+import os
+
 
 app = Flask(__name__)
 
 @app.route('/')
 def index():
+    print("Rendering index.html")
     return render_template("index.html")
 
 @app.route('/weather')
 def get_weather():
+    print("Rendering weather.html")
     city = request.args.get('city')
 
     if not bool(city.strip()):
@@ -29,5 +34,5 @@ def get_weather():
     )
 
 if __name__ == '__main__':
-    serve(app, host = '0.0.0.0', port = 8000)
-    # app.run(host = '0.0.0.0', port = 8000, debug=True)
+    print(f"Flask app starting with APP_Name = {os.getenv('APP_Name')}", flush=True)
+    serve(app, host='0.0.0.0', port=8000)

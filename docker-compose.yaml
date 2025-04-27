@@ -1,0 +1,31 @@
+version: '3.8'
+
+services:
+  app1:
+    build: .
+      # States the location of the Dockerfile
+
+    environment:
+      - APP_Name=app1 
+      # Sets an environment variable for the container
+      # This variable can be used in the application to identify which instance it is
+
+    ports:
+      - "8001:8000"
+      # Maps port 8001 on the host to port 8000 in the container
+      # This allows you to access the application running in the container via http://localhost:8001
+      # The application inside the container should be listening on port 8000
+      
+  app2:
+    build: .
+    environment:
+      - APP_Name=app2
+    ports:
+      - "8002:8000"
+
+  app3:
+    build: .
+    environment:
+      - APP_Name=app3
+    ports:
+      - "8003:8000"
